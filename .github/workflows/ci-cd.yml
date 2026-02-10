@@ -41,7 +41,7 @@ jobs:
           path: apps/node_modules
           key: build-${{ github.sha }}
       - name: Run tests
-        working-directory: ./app
+        working-directory: ./apps
         run: npm test
 
   security:
