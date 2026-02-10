@@ -95,9 +95,11 @@ app.get('/metrics', async (req, res) => {
   res.end(await register.metrics());
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`Metrics: http://localhost:${PORT}/metrics`);
-});
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+        console.log(`Metrics: http://localhost:${PORT}/metrics`);
+    });
+}
 
 module.exports = app;
