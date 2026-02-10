@@ -1,0 +1,11 @@
+groups:
+  - name: recording_rules
+    interval: 30s
+    rules:
+      - record: http:requests:rate:5m
+        expr: sum(rate(http_requests_total[5m]))
+
+      - record: http:errors:rate:5m
+        expr: |
+          (sum(rate(http_requests_total{status_code=~"5.."}[5m]))
+          / sum(rate(http_requests_total[5m]))) * 100
